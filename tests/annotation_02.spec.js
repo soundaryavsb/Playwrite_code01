@@ -3,10 +3,10 @@ import {test} from "@playwright/test"
 test("anno1",()=>{
     console.log("annotation 1");
 })
-test.only("anno2",()=>{
-    console.log("annotation 2");
-})
-test("anno3",()=>{
+// test.only("anno2",()=>{
+//     console.log("annotation 2");
+// })
+test.fixme("anno3",()=>{
     console.log("annotation 3");
 })
 test("anno4",()=>{
