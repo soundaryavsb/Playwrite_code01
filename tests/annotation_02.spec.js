@@ -15,3 +15,11 @@ test("anno4",()=>{
 test("anno5",()=>{
     console.log("annotation 5");
 })
+test.describe("smoke",()=>{
+    test("anno4",async({page})=>{
+        console.log("annotation 4");
+    })
+    test("anno5",async({page})=>{
+        console.log("annotation 5");
+    })
+});
