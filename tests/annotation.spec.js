@@ -4,7 +4,7 @@ import {test} from "@playwright/test"
 test.fail("fixtures",async({browser})=>{ //tells the browser
     let context=await browser.newContext(); //browser session(isolated session(profile), incognito mode)
     let page=await context.newPage(); //tab within the browser session
-    await page.goto("https://www.amazon.in/");
+    await page.goto("https://www");
     await page.waitForTimeout(3000);
 }) //control to multiple context(browser session) multiple windows
 
