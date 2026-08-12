@@ -1,5 +1,6 @@
 import {test} from "@playwright/test"
 
+//fail
 //browser fixture
 test.fail("fixtures",async({browser})=>{ //tells the browser
     let context=await browser.newContext(); //browser session(isolated session(profile), incognito mode)
@@ -19,6 +20,7 @@ test("page fixture",async({page})=>{ //tab inside the default 3 browsers
     await page.goto("https://www.amazon.in/");
 })//control over a single tab
 
+//skip
 //browsername
 test.skip("browsername fixture",async({browserName})=>{
     console.log(browserName);

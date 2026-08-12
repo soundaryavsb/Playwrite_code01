@@ -1,4 +1,6 @@
 import {test} from "@playwright/test"
+
+//slow
 test("test slow",async({page,browserName})=>{
 if(browserName==="chromium")
 {
