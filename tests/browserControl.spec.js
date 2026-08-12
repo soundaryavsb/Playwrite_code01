@@ -37,24 +37,41 @@ import {chromium, firefox, test, webkit} from "@playwright/test"
 //     await page.screenshot({path: "screenshot/amazon.png"});
 // })
 
-test("context cookies",async ({context}) => {
-    let page=await context.newPage();
-    await page.goto("https://www.amazon.in/");
-    await page.waitForTimeout(3000);
-    let cookies=await context.cookies();
-    console.log(cookies);
-    await context.clearCookies();
-    console.log("After clear cookies");
-    cookies=await context.cookies();
-    console.log(cookies);
-})
+// test("context cookies",async ({context}) => {
+//     let page=await context.newPage();
+//     await page.goto("https://www.amazon.in/");
+//     await page.waitForTimeout(3000);
+//     let cookies=await context.cookies();
+//     console.log(cookies);
+//     await context.clearCookies();
+//     console.log("After clear cookies");
+//     cookies=await context.cookies();
+//     console.log(cookies);
+// })
 
 // test("browser launch",async () => {
 //     // let browser=await chromium.launch();
 //     // let browser=await webkit.launch();
-//     let browser=await firefox.launch();
+//     let browser=await firefox.launch(); //May be all browsers launch if browsers not commented in config file
 //     let context=await browser.newContext();
 //     let page=await context.newPage();
 //     // await page.goto("https://www.amazon.in/");
 //     await page.waitForTimeout(3000);
 // })
+
+test("context.newContext()",async ({browser}) => {
+    let context=await browser.newContext();
+})
+
+test("context.newPage()",async ({context}) => {
+    let page=await context.newPage();
+    await page.goto("https://www.amazon.in/");
+})
+
+test("browser.close()",async ({browser}) => {
+    let context=await browser.newContext();
+    let page=await context.newPage();
+    await page.goto("https://www.amazon.in/");
+    browser.close();
+})
+
