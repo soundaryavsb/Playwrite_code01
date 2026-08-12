@@ -12,12 +12,12 @@ test("fixtures",async({browser})=>{ //tells the browser
 //context
 test("context fixture",async({context})=>{ //default it will create browser session in the all the 3 browser
     let page=await context.newPage();
-    await page.goto("url");
+    await page.goto("https://www.amazon.in/");
 }) //control over multiple tabs within one session
 
 // page
 test("page fixture",async({page})=>{ //tab inside the default 3 browsers
-    await page.goto("url");
+    await page.goto("https://www.amazon.in/");
 })//control over a single tab
 
 //browsername
