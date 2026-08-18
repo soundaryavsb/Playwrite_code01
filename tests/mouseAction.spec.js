@@ -26,7 +26,7 @@ test("hover action",async ({page}) => {
 })
 
 //!mouse move, drag and drop
-test.only("move",async ({page}) => {
+test("move",async ({page}) => {
     await page.goto("https://demoapps.qspiders.com/ui/dragDrop?sublist=0");
     await page.locator('div[class="cursor-move bg-orange-600 w-36 h-11 p-3 text-white absolute react-draggable"]').hover();
     await page.mouse.down();
@@ -37,5 +37,25 @@ test.only("move",async ({page}) => {
     await page.waitForTimeout(3000);
 })
 
+test("dispatchEvent",async ({page}) => {
+    await page.goto("https://demoapps.qspiders.com/ui/button/buttonDisabled?sublist=4");
+    // await page.locator('button[id="btn_abc"]').click();
+    // await page.locator('button[id="btn_abc"]').dispatchEvent("click"); 
+    await page.locator('input[id="submit"]').dispatchEvent("click"); //!disabled check box clicked
+    // await page.locator('input[id="submit"]').click({force:true});
+    await page.waitForTimeout(3000);
+})
 
-
+test.only("mouseEvent Practice",async ({page}) => {
+    await page.goto("https://www.automation-bible.com/mouse");
+    //? hover
+    await page.getByText("Hover over this box").hover();
+    await page.waitForTimeout(3000);
+    //? double click
+    await page.getByText("Double-click this box").dblclick();
+    await page.getByText("Double-click this box").click({clickCount:2});
+    await page.waitForTimeout(3000);
+    //? right click
+    await page.getByText("Right-click on this box").click({button:"right"});
+    await page.waitForTimeout(3000);
+})
