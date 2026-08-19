@@ -21,10 +21,23 @@ test("Wait for selector",async ({page}) => {
 })
 
 //?wait for state
-test.only("Wait for state",async ({page}) => {
+test("Wait for state",async ({page}) => {
     await page.goto("https://shoppersstack.com/");
     await page.locator('//h3[text()="Welcome to ShoppersStack. Enjoy shopping with us."]').waitFor({state:"attached"});
     await page.locator('//button[text()="Login"]').waitFor({state:"attached"}); //!30s
+})
+
+//?Wait for navigation
+test.only("Wait for navigation",async ({browser}) => {
+    let context=await browser.newContext();
+    let page=await context.newPage();
+    await page.goto("https://demoapps.qspiders.com/ui/browser?sublist=0");
+    // await page.waitForNavigation();
+    // await page.locator('//button[text()="view more"]').first().click();
+    let [nav]=await Promise.all([ //! Execution in parallel
+    await page.waitForNavigation(),
+    await page.locator('//button[text()="view more"]').first().click()
+    ])
 })
 
 
