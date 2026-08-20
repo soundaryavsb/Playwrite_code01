@@ -17,7 +17,12 @@ test.only("scroll into view element",async ({page}) => {
     await page.waitForTimeout(3000);
     await page.locator("input[type='checkbox']").click();
     await page.waitForTimeout(3000);
+    let AcceptOurPolicy=await page.getByText("Accept Our Policy");
+    console.log("Accept Our Policy Visible: "+AcceptOurPolicy.isVisible());
     await page.locator("input[type='checkbox']").uncheck();
+    // AcceptOurPolicy=await page.getByText("Accept Our Policy");
+    console.log("Accept Our Policy Visible: "+AcceptOurPolicy.isVisible());
     await page.waitForTimeout(3000);
 })
+
 
