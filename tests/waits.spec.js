@@ -28,7 +28,7 @@ test("Wait for state",async ({page}) => {
 })
 
 //?Wait for navigation
-test.only("Wait for navigation",async ({browser}) => {
+test("Wait for navigation",async ({browser}) => {
     let context=await browser.newContext();
     let page=await context.newPage();
     await page.goto("https://demoapps.qspiders.com/ui/browser?sublist=0");
@@ -40,4 +40,37 @@ test.only("Wait for navigation",async ({browser}) => {
     ])
 })
 
+//?WaitForLoadState - load
+test("Wait for load state",async ({page}) => {
+    await page.goto("https://www.amazon.in/");
+    await page.waitForLoadState("load");
+    console.log("loaded");
+    await page.getByPlaceholder("Search Amazon.in").fill("Shirt");
+})
 
+//?WaitForLoadState - domcontentloaded
+test("Wait for load state - dom",async ({page}) => {
+    await page.goto("https://www.amazon.in/");
+    await page.waitForLoadState("domcontentloaded");
+    console.log("loaded");
+    await page.getByPlaceholder("Search Amazon.in").fill("Shirt");
+})
+
+//?WaitForLoadState - networkidle
+test("Wait for load state - networkidle",async ({page}) => {
+    await page.goto("https://www.amazon.in/");
+    await page.waitForLoadState("networkidle");
+    console.log("loaded");
+    await page.getByPlaceholder("Search Amazon.in").fill("Shirt");
+})
+
+//? Wait for function
+test.only("Wait for function",async ({page}) => {
+    await page.goto("https://www.amazon.in/");
+    await page.waitForFunction(()=>{
+        // return document.readyState==='interactive'
+        // return document.readyState==='complete'
+        return document.readyState==='loading'
+    });
+    await page.getByPlaceholder("Search Amazon.in").fill("Shirt");
+})
