@@ -11,7 +11,7 @@ test("scroll vertical",async ({page}) => {
     await page.waitForTimeout(3000);
 })
 
-test.only("scroll into view element",async ({page}) => {
+test("scroll into view element",async ({page}) => {
     await page.goto("https://demoapps.qspiders.com/ui/scroll/newTabVertical");
     await page.locator("input[type='checkbox']").scrollIntoViewIfNeeded();
     await page.waitForTimeout(3000);
@@ -25,4 +25,12 @@ test.only("scroll into view element",async ({page}) => {
     await page.waitForTimeout(3000);
 })
 
-
+//!Scroll horzontal using wheel(x,y) 
+test.only("scroll horizontal",async ({page}) => {
+    await page.goto("https://demoapps.qspiders.com/ui/scroll/newTabHorizontal");
+    await page.waitForTimeout(3000);
+    await page.mouse.wheel(1000,0);
+    await page.waitForTimeout(3000);
+    await page.mouse.wheel(-1000,0);
+    await page.waitForTimeout(3000);
+})
