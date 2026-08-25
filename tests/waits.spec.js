@@ -4,7 +4,7 @@ import {test} from "@playwright/test"
 test("Explicait Wait",async ({page}) => {
     await page.goto("https://shoppersstack.com/");
     await page.locator('//h3[text()="Welcome to ShoppersStack. Enjoy shopping with us."]',{hasText:"Welcome to ShoppersStack. Enjoy shopping with us."}).waitFor();
-    await page.locator('//button[text()="Login"]',{hasText:"Login"}).waitFor();
+    await page.locator('//button[text()="Login"]',{hasText:"Log"}).waitFor();
 })
 
 //?Wait for timeout - give waits for a specific element
@@ -14,10 +14,11 @@ test("Wait for timeout",async ({page}) => {
 })
 
 //?Wait for selector
-test("Wait for selector",async ({page}) => {
+test.only("Wait for selector",async ({page}) => {
     await page.goto("https://shoppersstack.com/");
     await page.waitForSelector('//h3[text()="Welcome to ShoppersStack. Enjoy shopping with us."]');
     await page.waitForSelector('//button[text()="Login"]');
+    await page.locator('//button[text()="Login"]').click();
 })
 
 //?wait for state
@@ -65,7 +66,7 @@ test("Wait for load state - networkidle",async ({page}) => {
 })
 
 //? Wait for function
-test.only("Wait for function",async ({page}) => {
+test("Wait for function",async ({page}) => {
     await page.goto("https://www.amazon.in/");
     await page.waitForFunction(()=>{
         // return document.readyState==='interactive'
