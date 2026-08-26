@@ -1,4 +1,5 @@
 import {test} from "@playwright/test"
+
 //* standard drop down
 test("select",async ({page}) => {
     await page.goto("https://demoapps.qspiders.com/ui/dropdown?sublist=0");
@@ -8,8 +9,8 @@ test("select",async ({page}) => {
     await page.waitForTimeout(3000);
     //* selectiing through label
     //state
-    await page.locator("select[id='select5']").selectOption({label:"Tamil Nadu"});
-    await page.waitForTimeout(3000);
+    // await page.locator("select[id='select5']").selectOption({label:"Tamil Nadu"});
+    // await page.waitForTimeout(3000);
     //* selecting through visible text
     await page.locator("select[id='select5']").selectOption("Tamil Nadu");
     await page.waitForTimeout(3000);
