@@ -31,5 +31,4 @@ test.only("Multiple select",async ({page}) => {
     //click add button
     await page.locator("button[class='bg-orange-500 p-2 text-white rounded w-[150px]']").click();
     await page.waitForTimeout(3000);
-
 })
