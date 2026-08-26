@@ -8,4 +8,7 @@ test.only("radio button",async ({page}) => {
     // 2.When would you like your order to be delivered ?
     await page.locator("input[value='office']").check();
     await page.waitForTimeout(3000);
+    // Continue button
+    await page.locator("button[id='btn']").click();
+    await page.waitForTimeout(3000);
 })
