@@ -45,7 +45,7 @@ test("Custom dropDown",async ({page}) => {
 })
 
 //* 2st way to handle using through iteration
-test.only("Custom dropDown through itr",async ({page}) => {
+test("Custom dropDown through itr",async ({page}) => {
     await page.goto("https://www.amazon.in/s?k=shirt&crid=36FPBD72IBD7U&sprefix=shirt%2Caps%2C262&ref=nb_sb_noss_2");
     await page.locator("span[id='a-autoid-0-announce']").click();
     await page.waitForSelector("a[class='a-dropdown-link']");
@@ -55,6 +55,26 @@ test.only("Custom dropDown through itr",async ({page}) => {
     {
         let text=await option.textContent();
         if(text.includes("Newest"))
+        {
+            await option.click();
+            break;
+        }
+    }
+    await page.waitForTimeout(3000);
+})
+
+//* Auto suggestion
+test.only("Auto suggestion",async ({page}) => {
+    await page.goto("https://www.amazon.in/");
+    await page.locator("input[id='twotabsearchtextbox']").fill("shirt");
+    await page.waitForTimeout(3000);
+    await page.waitForSelector("div[class='s-suggestion-container']");
+    let options=await page.locator("div[class='s-suggestion-container']").all();
+    for(let option of options)
+    {
+        let text=await option.textContent();
+        console.log(text);
+        if(text.includes("woman"))
         {
             await option.click();
             break;
