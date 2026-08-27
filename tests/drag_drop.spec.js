@@ -94,13 +94,3 @@ test("drag and drop using method",async ({page}) => {
     await Laptop_Cover.dragTo(Laptop_Accessories);
     await page.waitForTimeout(2000);
 })
-
-//* Custom dropdown
-test.only("Custom dropDown",async ({page}) => {
-    await page.goto("https://www.amazon.in/s?k=shirt&crid=36FPBD72IBD7U&sprefix=shirt%2Caps%2C262&ref=nb_sb_noss_2");
-    await page.waitForSelector("span[id='a-autoid-0-announce']",{state:"attached"});
-    await page.locator("span[id='a-autoid-0-announce']").click();
-    await page.waitForTimeout(3000);
-    await page.locator("a[id='s-result-sort-select_4']").click();
-    await page.waitForTimeout(3000);
-})
