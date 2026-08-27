@@ -77,7 +77,7 @@ test("drag and drop to target using bounding box",async ({page}) => {
 })
 
 //* drag and drop to target using dragTo():
-test.only("drag and drop using method",async ({page}) => {
+test("drag and drop using method",async ({page}) => {
     await page.goto("https://demoapps.qspiders.com/ui/dragDrop/dragToCorrect?sublist=2");
     //! To Mobile Accessories:
     let Mobile_Charger=await page.locator("//div[text()='Mobile Charger']");
@@ -93,4 +93,14 @@ test.only("drag and drop using method",async ({page}) => {
     await Laptop_Charger.dragTo(Laptop_Accessories);
     await Laptop_Cover.dragTo(Laptop_Accessories);
     await page.waitForTimeout(2000);
+})
+
+//* Custom dropdown
+test.only("Custom dropDown",async ({page}) => {
+    await page.goto("https://www.amazon.in/s?k=shirt&crid=36FPBD72IBD7U&sprefix=shirt%2Caps%2C262&ref=nb_sb_noss_2");
+    await page.waitForSelector("span[id='a-autoid-0-announce']",{state:"attached"});
+    await page.locator("span[id='a-autoid-0-announce']").click();
+    await page.waitForTimeout(3000);
+    await page.locator("a[id='s-result-sort-select_4']").click();
+    await page.waitForTimeout(3000);
 })
