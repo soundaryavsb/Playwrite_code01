@@ -1,6 +1,6 @@
 import {test} from "@playwright/test"
 
-//?Wait for text
+//? 1.Wait for text
 test("Explicait Wait",async ({page}) => {
     await page.goto("https://shoppersstack.com/");
     await page.locator('//h3[text()="Welcome to ShoppersStack. Enjoy shopping with us."]',{hasText:"Welcome to ShoppersStack. Enjoy shopping with us."}).waitFor();
@@ -16,8 +16,9 @@ test("Wait for timeout",async ({page}) => {
 //?Wait for selector
 test.only("Wait for selector",async ({page}) => {
     await page.goto("https://shoppersstack.com/");
-    await page.waitForSelector('//h3[text()="Welcome to ShoppersStack. Enjoy shopping with us."]');
-    await page.waitForSelector('//button[text()="Login"]');
+    await page.waitForSelector('//h3[text()="Welcome to ShoppersStack. Enjoy shopping with us."]'); //!default state visible
+    await page.waitForSelector('//button[text()="Login"]',{state:"attached"});
+    //! state: "attached","visible","detached","hidden"
     await page.locator('//button[text()="Login"]').click();
 })
 
