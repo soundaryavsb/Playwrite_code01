@@ -48,7 +48,8 @@ test("Custom dropDown",async ({page}) => {
 test.only("Custom dropDown through itr",async ({page}) => {
     await page.goto("https://www.amazon.in/s?k=shirt&crid=36FPBD72IBD7U&sprefix=shirt%2Caps%2C262&ref=nb_sb_noss_2");
     await page.locator("span[id='a-autoid-0-announce']").click();
-    await page.locator("a[class='a-dropdown-link']").first().waitFor();
+    await page.waitForSelector("a[class='a-dropdown-link']");
+    // await page.locator("a[class='a-dropdown-link']").first().waitFor();
     let options=await page.locator("a[class='a-dropdown-link']").all(); //!return the locator of all the common elements
     for(let option of options)
     {
