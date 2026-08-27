@@ -21,7 +21,7 @@ test("Standard select",async ({page}) => {
 })
 
 //* Multiple drop down
-test.only("Multiple select",async ({page}) => {
+test("Multiple select",async ({page}) => {
     await page.goto("https://demoapps.qspiders.com/ui/dropdown/multiSelect?sublist=1");
     //select multiple option //!Note: store it in array
     await page.locator("select[id='select-multiple-native']")
@@ -34,11 +34,30 @@ test.only("Multiple select",async ({page}) => {
 })
 
 //* Custom dropdown
-test.only("Custom dropDown",async ({page}) => {
+//* 1st way to handle using locator/xpath
+test("Custom dropDown",async ({page}) => {
     await page.goto("https://www.amazon.in/s?k=shirt&crid=36FPBD72IBD7U&sprefix=shirt%2Caps%2C262&ref=nb_sb_noss_2");
     await page.waitForSelector("span[id='a-autoid-0-announce']",{state:"attached"});
     await page.locator("span[id='a-autoid-0-announce']").click();
     await page.waitForTimeout(3000);
     await page.locator("a[id='s-result-sort-select_4']").click();
+    await page.waitForTimeout(3000);
+})
+
+//* 2st way to handle using through iteration
+test.only("Custom dropDown through itr",async ({page}) => {
+    await page.goto("https://www.amazon.in/s?k=shirt&crid=36FPBD72IBD7U&sprefix=shirt%2Caps%2C262&ref=nb_sb_noss_2");
+    await page.locator("span[id='a-autoid-0-announce']").click();
+    await page.locator("a[class='a-dropdown-link']").first().waitFor();
+    let options=await page.locator("a[class='a-dropdown-link']").all(); //!return the locator of all the common element
+    for(let option of options)
+    {
+        let text=await option.textContent();
+        if(text.includes("Newest"))
+        {
+            await option.click();
+            break;
+        }
+    }
     await page.waitForTimeout(3000);
 })
