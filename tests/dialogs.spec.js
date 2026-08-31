@@ -34,6 +34,8 @@ test("dealing with all dialogs",async ({page}) => {
         if(dialog.type === "alert")
         {
         dialog.accept();
+        console.log(dialog.message());
+        
         }
         else if(dialog.type === "confirm")
         {
@@ -60,7 +62,7 @@ test("dealing with all dialogs",async ({page}) => {
 })
 
 //*dealing with prompt - page once
-test.only("dealing with all dialogs only once",async ({page}) => {
+test("dealing with all dialogs only once",async ({page}) => {
     page.once(("dialog"),async(dialog)=>{
         if(dialog.type === "alert")
         {
@@ -89,3 +91,4 @@ test.only("dealing with all dialogs only once",async ({page}) => {
     await page.locator("button[id='promptBtn']").click();
     await page.waitForTimeout(3000);
 })
+
