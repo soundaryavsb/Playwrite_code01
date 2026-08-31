@@ -1,4 +1,5 @@
 import {test} from "@playwright/test"
+import { log } from "console";
 
 //* auto handled - auto dennied
 test("alert",async ({page}) => {
@@ -92,3 +93,79 @@ test("dealing with all dialogs only once",async ({page}) => {
     await page.waitForTimeout(3000);
 })
 
+//Assignment 1:
+//* auto handled - auto dennied
+test("alert deny",async ({page}) => {
+    await page.goto("https://demoapps.qspiders.com/ui?scenario=1");
+    await page.locator("//section[text()='Popups']").click();
+    await page.waitForTimeout(2000);
+    await page.locator("//section[text()='Javascript']").click();
+    await page.waitForTimeout(2000);
+    //confirm 
+    await page.locator("(//input[@type='checkbox'])[1]").click();
+    await page.waitForTimeout(1000);
+    await page.locator("(//input[@type='checkbox'])[2]").click();
+    await page.waitForTimeout(1000);
+    await page.locator("(//input[@type='checkbox'])[3]").click();
+    await page.waitForTimeout(2000);
+    await page.locator("button[id='deleteButton']").click();
+    await page.waitForTimeout(3000);
+    //prompt
+    await page.locator("//a[text()='Prompt']").click();
+    await page.waitForTimeout(1000);
+    await page.locator("(//input[@type='checkbox'])[1]").click();
+    await page.waitForTimeout(1000);
+    await page.locator("(//input[@type='checkbox'])[2]").click();
+    await page.waitForTimeout(1000);
+    await page.locator("(//input[@type='checkbox'])[3]").click();
+    await page.waitForTimeout(2000);
+    await page.locator("button[id='deleteButton']").click();
+    await page.waitForTimeout(2000);
+})
+
+//*dealing with prompt - page on 
+test.only("page.on - Qspider demo",async ({page}) => {
+    page.on("dialog",(dialog)=>
+    {
+        if(dialog.type() === "alert")
+        {
+            dialog.accept();
+            console.log(dialog.message());
+        }
+        else if(dialog.type() === "confirm")
+        {
+            dialog.accept();
+            console.log(dialog.message());
+        }
+        else if(dialog.type() === "prompt")
+        {
+            dialog.accept("deleting");
+            console.log(dialog.message());
+        }
+    })
+    await page.goto("https://demoapps.qspiders.com/ui?scenario=1");
+    await page.locator("//section[text()='Popups']").click();
+    await page.waitForTimeout(2000);
+    await page.locator("//section[text()='Javascript']").click();
+    await page.waitForTimeout(2000);
+    //confirm 
+    await page.locator("(//input[@type='checkbox'])[1]").click();
+    await page.waitForTimeout(1000);
+    await page.locator("(//input[@type='checkbox'])[2]").click();
+    await page.waitForTimeout(1000);
+    await page.locator("(//input[@type='checkbox'])[3]").click();
+    await page.waitForTimeout(2000);
+    await page.locator("button[id='deleteButton']").click();
+    await page.waitForTimeout(3000);
+    //prompt
+    await page.locator("//a[text()='Prompt']").click();
+    await page.waitForTimeout(1000);
+    await page.locator("(//input[@type='checkbox'])[1]").click();
+    await page.waitForTimeout(1000);
+    await page.locator("(//input[@type='checkbox'])[2]").click();
+    await page.waitForTimeout(1000);
+    await page.locator("(//input[@type='checkbox'])[3]").click();
+    await page.waitForTimeout(2000);
+    await page.locator("button[id='deleteButton']").click();
+    await page.waitForTimeout(2000);
+})
