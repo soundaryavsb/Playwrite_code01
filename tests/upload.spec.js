@@ -18,7 +18,31 @@ test("Upload multiple files",async ({page}) => {
 })
 
 //printing directory of current control
-test.only("directory name",async ({page}) => {
+test("directory name",async ({page}) => {
     await page.goto("https://testautomationpractice.blogspot.com/");
     console.log(__dirname);  
+})
+
+//change the directory path
+test("change directory name",async ({page}) => {
+    await page.goto("https://testautomationpractice.blogspot.com/");
+    console.log(__dirname+"../Demo Files/demo1");  
+})
+
+//Assignment 1:
+//Upload single file
+test("Assignment Upload single file",async ({page}) => {
+    await page.goto("https://testautomationpractice.blogspot.com/");
+    await page.waitForTimeout(2000);
+    await page.locator('input[id="singleFileInput"]').setInputFiles("D:/Demo Files/Demo 1.txt");
+    await page.getByText("Upload Single File").click();
+    await page.waitForTimeout(2000);
+})
+
+// Upload multiple files
+test.only("Ass Upload multiple files",async ({page}) => {
+    await page.goto("https://testautomationpractice.blogspot.com/");
+    await page.locator('input[id="multipleFilesInput"]').setInputFiles(["D:/Demo Files/Demo 1.txt","D:/Demo Files/Demo 2.txt"])
+    await page.getByText("Upload Multiple Files").click();
+    await page.waitForTimeout(3000);
 })
