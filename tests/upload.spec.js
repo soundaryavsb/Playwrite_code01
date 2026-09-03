@@ -1,6 +1,6 @@
 import {test} from "@playwright/test"
-import { dirname } from "node:path";
-
+// import { dirname } from "node:path";
+import path from "node:path"
 //Upload single file
 test("Upload single file",async ({page}) => {
     await page.goto("https://testautomationpractice.blogspot.com/");
@@ -24,9 +24,15 @@ test("directory name",async ({page}) => {
 })
 
 //change the directory path
-test("change directory name",async ({page}) => {
+test.only("change directory name",async ({page}) => {
     await page.goto("https://testautomationpractice.blogspot.com/");
-    console.log(__dirname+"../Demo Files/demo1");  
+    // console.log(__dirname+"../Demo Files/demo1");  
+    let filePath=path.join(__dirname,"../Demo Files/demo1.pdf");
+
+    console.log(filePath);
+    await page.locator('input[id="singleFileInput"]').setInputFiles(filePath);
+    await page.getByText('Upload Single File').click();
+    await page.waitForTimeout(2000);
 })
 
 //Assignment 1:
@@ -40,7 +46,7 @@ test("Assignment Upload single file",async ({page}) => {
 })
 
 // Upload multiple files
-test.only("Ass Upload multiple files",async ({page}) => {
+test("Ass Upload multiple files",async ({page}) => {
     await page.goto("https://testautomationpractice.blogspot.com/");
     await page.locator('input[id="multipleFilesInput"]').setInputFiles(["D:/Demo Files/Demo 1.txt","D:/Demo Files/Demo 2.txt"])
     await page.getByText("Upload Multiple Files").click();
