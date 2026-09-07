@@ -26,3 +26,34 @@ test("Using test data in script",async({page})=>{
         await page.waitForTimeout(2000);
     }  
 })
+
+//* Excel data from cloumn
+test("Using test data in script- cloumn",async ({page}) => {
+    let book=await new excel.Workbook();
+    await book.xlsx.readFile(path.join(__dirname,"../Data Driven Testing/SSLLoginExcel.xlsx"));
+    let sheet=await book.getWorksheet("Sheet2");
+    let alldata=[];
+    for(let data=1;data<=sheet.actualColumnCount;data++)
+    {
+        let column=sheet.getColumn(data);
+        let url=column.getCell(1,data).toString();
+        let usn=column.getCell(2,data).toString();
+        let pwd=column.getCell(3,data).toString();
+        alldata.push({url:url,username:usn,password:pwd})
+    }  
+            console.log(alldata);
+})
+
+//* Writing data in excel
+test.only("Writing data into excel",async ({page}) => {
+    let book=new excel.Workbook();
+    await book.xlsx.readFile(path.join(__dirname,"../Data Driven Testing/multipledata.xlsx"))
+    let sheet=book.getWorksheet("Sheet2")
+    if(!sheet)
+    {
+        sheet=book.addWorksheet("Sheet2");
+    }
+    sheet.getRow(1).getCell(1).value ="Raady to move";
+    await book.xlsx.writeFile(path.join(__dirname,"../Data Driven Testing/multipledata.xlsx"))
+    console.log("data written successfully");
+})
