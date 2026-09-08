@@ -45,7 +45,7 @@ test("Using test data in script- cloumn",async ({page}) => {
 })
 
 //* Writing data in excel
-test.only("Writing data into excel",async ({page}) => {
+test("Writing data into excel",async ({page}) => {
     let book=new excel.Workbook();
     await book.xlsx.readFile(path.join(__dirname,"../Data Driven Testing/multipledata.xlsx"))
     let sheet=book.getWorksheet("Sheet2")
@@ -55,5 +55,27 @@ test.only("Writing data into excel",async ({page}) => {
     }
     sheet.getRow(1).getCell(1).value ="Raady to move";
     await book.xlsx.writeFile(path.join(__dirname,"../Data Driven Testing/multipledata.xlsx"))
+    console.log("data written successfully");
+})
+
+//* Fetching auto suggessions
+test.only("Fetching auto suggessions",async ({page}) => {
+    let book=new excel.Workbook();
+    await book.xlsx.readFile(path.join(__dirname,"../Data Driven Testing/multipledata.xlsx"))
+    let sheet=book.getWorksheet("Sheet3")
+    if(!sheet)
+    {
+        sheet=book.addWorksheet("Sheet3");
+    }
+    await page.goto("https://www.amazon.in/");
+    await page.locator('input[id="twotabsearchtextbox"]').fill("laptop");
+    await page.waitForSelector('div[class="s-suggestion-container"]');
+    let sugg=await page.locator('div[class="s-suggestion-container"]').allTextContents();
+    console.log(sugg);
+    for(let text of sugg){
+        let index=sugg.indexOf(text);
+        sheet.getRow(index+1).getCell(1).value=text;
+    }
+    await book.xlsx.writeFile(path.join(__dirname,"../Data Driven Testing/multipledata.xlsx"));
     console.log("data written successfully");
 })
