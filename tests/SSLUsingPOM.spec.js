@@ -14,7 +14,7 @@ test("SSL login using pom",async({page})=>{
         await page.waitForTimeout(2000);
 })
 
-//* Login using POM & DDT
+//* Login shoppersstack using POM & DDT
 test.only("SSL login using pom & DDT",async({page})=>{
         let loginSSLObj=new LoginSSL(page);
         let url=LoginSSLddt.url;
