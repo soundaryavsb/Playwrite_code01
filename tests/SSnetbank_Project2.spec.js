@@ -5,6 +5,7 @@ import HomeSS from "../POM/HomePage_SS.js"
 import AddProductSS from "../POM/AddProduct_SS.js"
 import PaymentMethodSS from "../POM/PaymentMethod_SS.js"
 import LoginSSLddt from "../Data Driven Testing/SSLogin.json"
+import framePage from "../POM/frame_SS.js"
 
 
 test.only("SSL login using pom & DDT",async({page})=>{
@@ -13,6 +14,7 @@ test.only("SSL login using pom & DDT",async({page})=>{
     let HomeSSPageObj=new HomeSS(page);
     let AddProductobj=new AddProductSS(page);
     let PaymentMethodObj=new PaymentMethodSS(page);
+    let framePageObj=new framePage(page);
     let url=LoginSSLddt.url;
     let usn=LoginSSLddt.username;
     let pwd=LoginSSLddt.password;
@@ -57,27 +59,28 @@ test.only("SSL login using pom & DDT",async({page})=>{
     await PaymentMethodObj.PaymentProceedButton.click();
     await page.waitForTimeout(1000);
     //iframe Switch - ICD
-    let frame1=page.frameLocator("iframe[src*='select-bank']");
+    // let frame1=page.frameLocator("iframe[src*='select-bank']");
+    let frame1=framePageObj.frame1;
     //ICD radio button
-    await frame1.locator("input[value='ICD']").check();
+    await framePageObj.ICD.check();
     await page.waitForTimeout(1000);
     //submit button
-    await frame1.getByRole('button',{name:"Submit"}).click();
+    await framePageObj.choosePayment.click();
     await page.waitForTimeout(3000);
   
     //netbanking frame
-    let frame2=page.frameLocator("iframe[src*='select-bank']").frameLocator("iframe[src*='net-banking-login']");
+    let frame2=framePageObj.frame2;
     await page.waitForTimeout(1000);
 
-    await frame2.locator("label[id='User ID-label']").fill(icdusr);
+    await framePageObj.icdusrTextBox.fill(icdusr);
     await page.waitForTimeout(1000);
-    await frame2.locator("input[id='Password']").fill(icdpwd);
+    await framePageObj.icdpwdTextBox.fill(icdpwd);
     await page.waitForTimeout(1000);
-    await frame2.getByRole('button',{name:"Submit"}).click();
+    await framePageObj.netbankingSubmit.click();
     await page.waitForTimeout(3000);
 
     //pay Now frame
-    let frame3=frame2.frameLocator("iframe[src*='pay-amount-frame']").frameLocator("iframe[src*='pay-amount']")
-    await frame3.getByRole("button",{name:"Pay Now"}).click();
+    let frame3=framePageObj.frame3;
+    await framePageObj.paynowButton.click();
     await page.waitForTimeout(3000);
 })
