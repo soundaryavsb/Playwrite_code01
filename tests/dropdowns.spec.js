@@ -35,7 +35,7 @@ test("Multiple select",async ({page}) => {
 
 //* Custom dropdown
 //* 1st way to handle using locator/xpath
-test("Custom dropDown",async ({page}) => {
+test.only("Custom dropDown",async ({page}) => {
     await page.goto("https://www.amazon.in/s?k=shirt&crid=36FPBD72IBD7U&sprefix=shirt%2Caps%2C262&ref=nb_sb_noss_2");
     await page.waitForSelector("span[id='a-autoid-0-announce']",{state:"attached"});
     await page.locator("span[id='a-autoid-0-announce']").click();
@@ -54,6 +54,7 @@ test("Custom dropDown through itr",async ({page}) => {
     for(let option of options)
     {
         let text=await option.textContent();
+        console.log("text: "+text);
         if(text.includes("Newest"))
         {
             await option.click();
@@ -64,7 +65,7 @@ test("Custom dropDown through itr",async ({page}) => {
 })
 
 //* Auto suggestion
-test.only("Auto suggestion",async ({page}) => {
+test("Auto suggestion",async ({page}) => {
     await page.goto("https://www.amazon.in/");
     await page.locator("input[id='twotabsearchtextbox']").fill("shirt");
     await page.waitForTimeout(3000);
