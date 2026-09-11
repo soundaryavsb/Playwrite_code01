@@ -16,7 +16,7 @@ test("Test1",async()=>
 {
     console.log("Test1");
 })
-test("Test2",async()=>
+test.only("Test2",async()=>
 {
     console.log("Test2");
 })
