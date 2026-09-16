@@ -1,6 +1,7 @@
 import {test} from "@playwright/test"
 import { generatePhoneNumber,generateEmailID } from "../utilities/genericutitlity.js"
-import {login} from "../utilities/businessUtility.js"
+import {createAccount, login} from "../utilities/businessUtility.js"
+
 test("Utitlty use",async ({page}) => {
     console.log(generateEmailID());
     console.log(generatePhoneNumber());
@@ -34,4 +35,5 @@ test("Utitlty use",async ({page}) => {
 //* Business Utility
 test.only("Business Utility",async ({page}) => {
     await login(page)  
+    await createAccount(page)
 })
