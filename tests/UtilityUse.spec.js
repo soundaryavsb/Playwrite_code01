@@ -1,5 +1,6 @@
 import {test} from "@playwright/test"
 import { generatePhoneNumber,generateEmailID } from "../utilities/genericutitlity.js"
+import {login} from "../utilities/businessUtility.js"
 test("Utitlty use",async ({page}) => {
     console.log(generateEmailID());
     console.log(generatePhoneNumber());
@@ -28,4 +29,9 @@ test("Utitlty use",async ({page}) => {
     //Register Button
     await page.getByRole("button",{name:"Register"}).click();
     await page.waitForTimeout(3000);
+})
+
+//* Business Utility
+test.only("Business Utility",async ({page}) => {
+    await login(page)  
 })
