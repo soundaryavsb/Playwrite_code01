@@ -3,7 +3,7 @@ import {expect, test} from "@playwright/test"
 test("assertion",async ({page}) => {
   await page.goto("https://shoppersstack.com/");
   await page.waitForTimeout(3000);
-  await expect.soft(page.locator("//h3[text()='Welcome to ShoppersStack. Enjoy shopping with us.']")).toHaveText("Welcome to ShoppersStack. Enjoy shopping with");
+  await expect.soft(page.locator("//h3[text()='Welcome to ShoppersStack. Enjoy shopping with us.']")).toHaveText("Welcome to ShoppersStack. Enjoy shopping with us.");
 
   await expect(page.locator("button[id='loginBtn']")).toBeEnabled();
   await page.locator("button[id='loginBtn']").click();
